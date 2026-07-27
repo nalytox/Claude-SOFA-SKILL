@@ -19,3 +19,7 @@ Usar la matriz de literatura (`templates/plantillas.md`, sección 1) para no per
 ## Copyright y reproducción
 
 Al citar contenido de un paper encontrado por búsqueda: parafrasear siempre. Nunca reproducir extractos largos ni reconstruir párrafos completos, aunque el usuario lo pida — ofrecer el resumen en palabras propias y el enlace a la fuente original.
+
+---
+
+**Formato de entrega:** usar el componente de tabla interactiva de `assets/base-template.html` para la matriz de literatura (ver `assets/guia-html-interactivo.md`).

@@ -26,3 +26,7 @@ Toda propuesta debe declarar explícitamente qué **no** cubrirá — esto no es
 ## Cronograma
 
 Pedir el plazo total disponible antes de proponer fases — un cronograma genérico de "6 meses" es inútil si el usuario tiene 3 o tiene 18. Repartir por fases (revisión de literatura, recolección de datos, análisis, redacción, revisión) proporcional al tiempo real.
+
+---
+
+**Formato de entrega:** usar el componente de acordeón, una sección expandible por parte de la propuesta (ver `assets/guia-html-interactivo.md`).

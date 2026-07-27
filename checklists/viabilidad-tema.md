@@ -15,3 +15,7 @@ Usar para evaluar cualquier tema o idea de tesis candidata, antes de presentarla
 Un "no" claro en **Factible** o **Ético** significa replantear el tema antes de seguir avanzando, sin importar qué tan interesante sea en los demás criterios — estos dos son bloqueantes, no promediables con el resto.
 
 Un tema que pasa los cinco criterios de forma débil (ni claramente sí ni claramente no) todavía puede servir, pero vale la pena decir explícitamente en qué criterio es más débil, para que el usuario sepa qué vigilar mientras avanza.
+
+---
+
+**Formato de entrega:** usar el componente de checklist con barra de progreso (ver `assets/guia-html-interactivo.md`).

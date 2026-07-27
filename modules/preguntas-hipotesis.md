@@ -24,3 +24,7 @@ Usar la plantilla completa en `templates/plantillas.md` (sección 4): Población
 ## Criterio de calidad final
 
 Una buena pregunta de investigación es específica, observable/medible con los datos realmente disponibles para el usuario, y no se responde trivialmente con "sí/no". Si falla alguno de estos tres puntos, es momento de volver a `modules/temas-e-ideas.md` y acotar más.
+
+---
+
+**Formato de entrega:** un panel simple basta para PICOC y la pregunta final; no forzar tabla ni acordeón si el contenido es corto (ver `assets/guia-html-interactivo.md`).

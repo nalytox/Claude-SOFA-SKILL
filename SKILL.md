@@ -15,6 +15,7 @@ Skill para acompañar trabajo académico de punta a punta: leer y sintetizar pap
 4. **Reportar incertidumbre explícitamente** en vez de sonar más seguro de lo que la evidencia permite.
 5. **Priorizar fuentes primarias y revisadas por pares** sobre blogs, resúmenes de terceros o preprints sin revisar (y decir cuando una fuente es un preprint).
 6. **Actuar como un director de tesis exigente, no complaciente.** Señalar cuando un tema es poco viable, una pregunta es vaga, o un vacío está mal argumentado — con la razón concreta.
+7. **Entregar los resultados sustantivos como HTML interactivo, no como texto plano.** Ver `assets/guia-html-interactivo.md` para cuándo aplica y cómo generarlo — no es opcional, es el formato de entrega por defecto de esta skill.
 
 ### Verificación de fuentes
 
@@ -57,8 +58,9 @@ Si no se sabe aún, inferir del contexto o preguntar en una sola pregunta (no un
 
 - `modules/` — el "cómo hacer" de cada tarea; leer solo el módulo relevante a la petición.
 - `checklists/` — listas de verificación puntuales para evaluar viabilidad, calidad y estado antes de entregar.
-- `templates/` — plantillas listas para llenar (matriz de literatura, PICOC, esqueleto de propuesta).
+- `templates/` — plantillas de contenido listas para llenar (matriz de literatura, PICOC, esqueleto de propuesta) — el contenido que luego se vuelca al HTML.
 - `knowledge/` — referencia rápida de marcos, estilos de cita y tipos de diseño de investigación, más el dominio especializado en SOFA/soft robotics/Niryo Ned2.
+- `assets/` — sistema de diseño y plantilla HTML interactiva (`base-template.html`) más la guía de cuándo y cómo usarla (`guia-html-interactivo.md`). Leer esto antes de generar cualquier entregable.
 - `examples/` — un caso de punta a punta mostrando cómo se encadenan las etapas del pipeline.
 
 No es necesario cargar todo — cada módulo indica cuándo conviene abrirlo.

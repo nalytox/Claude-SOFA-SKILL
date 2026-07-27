@@ -16,3 +16,7 @@ Nunca estructurar párrafo por paper ("Smith (2020) dice... Pérez (2021) dice..
 ## La regla que más se olvida
 
 Una revisión de literatura no existe para demostrar que se leyó mucho — existe para **justificar por qué la tesis del usuario es necesaria**. Si al terminar de escribirla no queda clarísimo qué vacío específico llena la investigación propuesta, la revisión todavía no está lista, sin importar cuántas fuentes tenga. Usar `checklists/calidad-revision-literatura.md` antes de darla por terminada.
+
+---
+
+**Formato de entrega:** usar el componente de acordeón, una sección expandible por bloque temático (ver `assets/guia-html-interactivo.md`).

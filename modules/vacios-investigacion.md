@@ -25,3 +25,7 @@ Un vacío no es automáticamente una buena idea de tesis. Antes de darlo por bue
 3. ¿Es abordable con los recursos y el tiempo reales del usuario? (Conecta con el criterio Factible de FINER, en `checklists/viabilidad-tema.md`.)
 
 Si el vacío pasa este filtro, pasa a la etapa de "Metodología" del pipeline (`modules/propuesta-tesis.md`).
+
+---
+
+**Formato de entrega:** usar el componente de tabla interactiva para el análisis de vacíos (ver `assets/guia-html-interactivo.md`).

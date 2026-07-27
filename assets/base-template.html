@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de diseño — Investigación y Tesis</title>
+<style>
+  /* ============================================================
+     SISTEMA DE DISEÑO — "cuaderno de laboratorio / mesa de dibujo"
+     Concepto: papel de cuaderno técnico, tinta de laboratorio,
+     marcas de registro de plano de ingeniería en las esquinas de
+     cada panel. Nace del dominio de la skill: investigación
+     académica rigurosa + (cuando aplica) simulación/ingeniería.
+     No usar fuentes externas — todo con pilas de fuentes de sistema
+     para que funcione sin conexión a red dentro del artifact.
+     ============================================================ */
+  :root{
+    --paper:      #F3F4F1;
+    --paper-raised:#FFFFFF;
+    --grid:       #DBE1DC;
+    --ink:        #1E2A26;
+    --ink-soft:   #55635C;
+    --signal-blue:#1C5D6E;  /* primario: verificado, activo, acción principal */
+    --signal-rust:#9C4A1D;  /* alerta: vacío, sin verificar, revisión mayor */
+    --signal-green:#3E6B4F; /* éxito: completo, verificado, viable */
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Consolas, monospace;
+    --serif: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  }
+
+  *{box-sizing:border-box;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    padding:32px 24px 80px;
+    background-color:var(--paper);
+    /* papel cuadriculado muy tenue, no decorativo — referencia visual a un
+       cuaderno de laboratorio, se mantiene discreto en todo momento */
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:16px;
+    line-height:1.55;
+  }
+
+  a{color:var(--signal-blue);}
+  :focus-visible{outline:2px solid var(--signal-blue); outline-offset:2px;}
+
+  .doc{max-width:840px; margin:0 auto;}
+
+  /* ---------- Encabezado tipo "registro de laboratorio" ---------- */
+  .letterhead{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:16px; flex-wrap:wrap;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:14px; margin-bottom:28px;
+  }
+  .letterhead .doc-type{
+    font-family:var(--mono); font-size:11px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--ink-soft); margin:0 0 6px;
+  }
+  .letterhead h1{
+    font-family:var(--serif); font-weight:600; font-size:28px; margin:0;
+  }
+  .letterhead .meta{
+    font-family:var(--mono); font-size:12px; color:var(--ink-soft);
+    text-align:right; line-height:1.6;
+  }
+
+  /* ---------- Rastreador de etapas del pipeline (1–9) ---------- */
+  .stepper{
+    display:flex; gap:4px; margin:0 0 32px; padding:0; list-style:none;
+    font-family:var(--mono); font-size:11px;
+  }
+  .stepper li{
+    flex:1; text-align:center; padding:8px 2px; border-bottom:3px solid var(--grid);
+    color:var(--ink-soft); position:relative;
+  }
+  .stepper li.done{border-color:var(--signal-green); color:var(--signal-green);}
+  .stepper li.active{border-color:var(--signal-blue); color:var(--signal-blue); font-weight:700;}
+
+  /* ---------- Panel base con marcas de registro en las esquinas ---------- */
+  .panel{
+    background:var(--paper-raised);
+    border:1px solid var(--grid);
+    padding:24px;
+    margin:0 0 28px;
+    position:relative;
+    background-image:
+      linear-gradient(var(--signal-blue) 1px, transparent 1px), linear-gradient(90deg, var(--signal-blue) 1px, transparent 1px),
+      linear-gradient(var(--signal-blue) 1px, transparent 1px), linear-gradient(90deg, var(--signal-blue) 1px, transparent 1px),
+      linear-gradient(var(--signal-blue) 1px, transparent 1px), linear-gradient(90deg, var(--signal-blue) 1px, transparent 1px),
+      linear-gradient(var(--signal-blue) 1px, transparent 1px), linear-gradient(90deg, var(--signal-blue) 1px, transparent 1px);
+    background-repeat:no-repeat;
+    background-size:9px 1px, 1px 9px, 9px 1px, 1px 9px, 9px 1px, 1px 9px, 9px 1px, 1px 9px;
+    background-position:
+      -1px -1px, -1px -1px,
+      calc(100% + 1px) -1px, calc(100% + 1px) -1px,
+      -1px calc(100% + 1px), -1px calc(100% + 1px),
+      calc(100% + 1px) calc(100% + 1px), calc(100% + 1px) calc(100% + 1px);
+  }
+  .panel > h2{
+    font-family:var(--mono); font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--signal-blue); margin:0 0 16px;
+  }
+  .panel > p.hint{font-size:14px; color:var(--ink-soft); margin-top:-8px;}
+
+  /* ---------- Etiquetas de estado ---------- */
+  .badge{
+    display:inline-flex; align-items:center; gap:5px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em;
+    padding:3px 8px; border:1px solid currentColor; border-radius:2px;
+  }
+  .badge.blue{color:var(--signal-blue);}
+  .badge.rust{color:var(--signal-rust);}
+  .badge.green{color:var(--signal-green);}
+
+  /* ---------- Tabla interactiva (matriz de literatura / vacíos) ---------- */
+  .table-tools{display:flex; gap:10px; margin-bottom:12px; align-items:center;}
+  .table-tools input{
+    font-family:var(--serif); font-size:14px; padding:7px 10px;
+    border:1px solid var(--grid); background:var(--paper); color:var(--ink);
+    flex:1; max-width:280px;
+  }
+  table.matrix{width:100%; border-collapse:collapse; font-size:14px;}
+  table.matrix th, table.matrix td{
+    text-align:left; padding:9px 10px; border-bottom:1px solid var(--grid);
+    vertical-align:top;
+  }
+  table.matrix th{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--ink-soft); cursor:pointer; user-select:none; white-space:nowrap;
+  }
+  table.matrix th:hover{color:var(--signal-blue);}
+  table.matrix th .arrow{font-family:var(--mono); font-size:10px; opacity:.6;}
+  table.matrix tr:hover td{background:rgba(28,93,110,0.04);}
+
+  /* ---------- Checklist interactiva (FINER, calidad, entrega) ---------- */
+  .progress-track{
+    height:6px; background:var(--grid); margin-bottom:16px; position:relative;
+  }
+  .progress-fill{
+    height:100%; background:var(--signal-green); width:0%;
+    transition:width .25s ease;
+  }
+  .progress-label{font-family:var(--mono); font-size:11px; color:var(--ink-soft); margin:-10px 0 18px;}
+  ul.checklist{list-style:none; margin:0; padding:0;}
+  ul.checklist li{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:10px 0; border-bottom:1px dashed var(--grid);
+  }
+  ul.checklist li:last-child{border-bottom:none;}
+  ul.checklist input[type="checkbox"]{
+    appearance:none; -webkit-appearance:none;
+    width:18px; height:18px; min-width:18px; margin-top:2px;
+    border:1.5px solid var(--ink-soft); background:var(--paper-raised);
+    cursor:pointer; position:relative;
+  }
+  ul.checklist input[type="checkbox"]:checked{
+    background:var(--signal-green); border-color:var(--signal-green);
+  }
+  ul.checklist input[type="checkbox"]:checked::after{
+    content:""; position:absolute; left:5px; top:1px;
+    width:5px; height:9px; border:solid white; border-width:0 2px 2px 0;
+    transform:rotate(40deg);
+  }
+  ul.checklist label{cursor:pointer; flex:1;}
+  ul.checklist li.checked label{color:var(--ink-soft); text-decoration:line-through;}
+
+  /* ---------- Acordeón (propuesta de tesis, revisión de literatura, Revisor #2) ---------- */
+  .accordion-item{border:1px solid var(--grid); margin-bottom:8px;}
+  .accordion-trigger{
+    width:100%; text-align:left; background:var(--paper-raised); border:none;
+    padding:14px 16px; font-family:var(--serif); font-size:15px; font-weight:600;
+    color:var(--ink); cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+    gap:12px;
+  }
+  .accordion-trigger .icon{font-family:var(--mono); color:var(--signal-blue); font-size:14px;}
+  .accordion-panel{
+    max-height:0; overflow:hidden; transition:max-height .2s ease;
+    padding:0 16px; font-size:14.5px; color:var(--ink-soft);
+  }
+  .accordion-item.open .accordion-panel{padding:0 16px 16px;}
+
+  /* ---------- Tabs ---------- */
+  .tabs{display:flex; gap:2px; border-bottom:2px solid var(--ink); margin-bottom:18px;}
+  .tab-btn{
+    font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.05em;
+    background:none; border:none; padding:9px 14px; cursor:pointer; color:var(--ink-soft);
+    border-bottom:2px solid transparent; margin-bottom:-2px;
+  }
+  .tab-btn.active{color:var(--signal-blue); border-color:var(--signal-blue);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  footer.note{font-family:var(--mono); font-size:11px; color:var(--ink-soft); margin-top:40px;}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ============ 1. ENCABEZADO "REGISTRO DE LABORATORIO" ============
+       Usar en TODO artifact que produzca esta skill: da identidad
+       reconocible sin importar qué componente venga después. -->
+  <div class="letterhead">
+    <div>
+      <p class="doc-type">Registro de investigación · Investigación y Tesis</p>
+      <h1>Matriz de literatura — ejemplo</h1>
+    </div>
+    <div class="meta">
+      Etapa 2 — Búsqueda<br>
+      Documento generado por Claude
+    </div>
+  </div>
+
+  <!-- ============ 2. RASTREADOR DE PIPELINE (1–9) ============
+       Numeración legítima aquí: refleja el pipeline real de 9 etapas
+       de la skill, no es decorativa. Marcar "done" / "active" según
+       en qué etapa está la conversación; el resto queda neutro. -->
+  <ul class="stepper">
+    <li class="done">1 Pregunta</li>
+    <li class="active">2 Búsqueda</li>
+    <li>3 Taxonomía</li>
+    <li>4 Comparar</li>
+    <li>5 Vacíos</li>
+    <li>6 Novedad</li>
+    <li>7 Método</li>
+    <li>8 Revisor 2</li>
+    <li>9 Acción</li>
+  </ul>
+
+  <!-- ============ 3. TABLA INTERACTIVA — matriz de literatura / vacíos ============ -->
+  <section class="panel">
+    <h2>Matriz de literatura (ordenable y filtrable)</h2>
+    <div class="table-tools">
+      <input type="text" id="matrixFilter" placeholder="Filtrar por autor, hallazgo…">
+      <span class="badge blue" id="matrixCount">3 filas</span>
+    </div>
+    <table class="matrix" id="matrixTable">
+      <thead>
+        <tr>
+          <th data-type="text">Autor, año <span class="arrow">↕</span></th>
+          <th data-type="text">Método <span class="arrow">↕</span></th>
+          <th data-type="text">Hallazgo principal <span class="arrow">↕</span></th>
+          <th data-type="text">Vacío <span class="arrow">↕</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>García, 2023</td><td>Cuasi-experimental</td><td>Mejora moderada en retención</td><td>Muestra pequeña</td></tr>
+        <tr><td>Chen, 2022</td><td>Revisión sistemática</td><td>Resultados mixtos entre disciplinas</td><td>Contextual</td></tr>
+        <tr><td>Okafor, 2024</td><td>Estudio de caso</td><td>Efecto positivo a corto plazo</td><td>Temporal</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 4. CHECKLIST INTERACTIVA — FINER / calidad / entrega ============ -->
+  <section class="panel">
+    <h2>Checklist de viabilidad (FINER)</h2>
+    <div class="progress-track"><div class="progress-fill" id="checklistFill"></div></div>
+    <p class="progress-label" id="checklistLabel">0 de 5 completos</p>
+    <ul class="checklist" id="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">Factible con los datos y tiempo disponibles</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Interesante para la comunidad académica</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Novedoso — verificado con búsqueda</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Ético — sin riesgos de consentimiento o daño</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">Relevante para el campo o la práctica</label></li>
+    </ul>
+  </section>
+
+  <!-- ============ 5. ACORDEÓN — Revisor #2 / propuesta / revisión de literatura ============ -->
+  <section class="panel">
+    <h2>Revisor #2 — ejemplo de salida</h2>
+    <div class="accordion-item open">
+      <button class="accordion-trigger" aria-expanded="true">
+        Fortalezas <span class="icon">−</span>
+      </button>
+      <div class="accordion-panel" style="max-height:200px;">
+        <p>Vacío contextual bien respaldado con literatura reciente. Pregunta específica y medible.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" aria-expanded="false">
+        Debilidades mayores <span class="icon">+</span>
+      </button>
+      <div class="accordion-panel">
+        <p>Tamaño de muestra limita la generalización — debe declararse como limitación explícita.</p>
+      </div>
+    </div>
+    <p style="margin-top:14px;">
+      <span class="badge green">Veredicto: revisión menor</span>
+    </p>
+  </section>
+
+  <!-- ============ 6. TABS — p. ej. alternar vista resumen / vista detalle ============ -->
+  <section class="panel">
+    <h2>Tabs</h2>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="resumen">Resumen</button>
+      <button class="tab-btn" data-tab="detalle">Detalle</button>
+    </div>
+    <div class="tab-panel active" data-panel="resumen"><p>Vista condensada del análisis.</p></div>
+    <div class="tab-panel" data-panel="detalle"><p>Vista extendida con metodología completa.</p></div>
+  </section>
+
+  <footer class="note">assets/base-template.html — Investigación y Tesis</footer>
+</div>
+
+<script>
+  // ---- Checklist: progreso en vivo ----
+  const items = document.querySelectorAll('#checklist input[type="checkbox"]');
+  const fill = document.getElementById('checklistFill');
+  const label = document.getElementById('checklistLabel');
+  function updateProgress(){
+    const total = items.length;
+    const done = Array.from(items).filter(i => i.checked).length;
+    fill.style.width = (done/total*100) + '%';
+    label.textContent = done + ' de ' + total + ' completos';
+  }
+  items.forEach(i => i.addEventListener('change', () => {
+    i.closest('li').classList.toggle('checked', i.checked);
+    updateProgress();
+  }));
+  updateProgress();
+
+  // ---- Tabla: orden por columna ----
+  document.querySelectorAll('#matrixTable th').forEach((th, colIndex) => {
+    let asc = true;
+    th.addEventListener('click', () => {
+      const tbody = document.querySelector('#matrixTable tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        const av = a.children[colIndex].textContent.trim().toLowerCase();
+        const bv = b.children[colIndex].textContent.trim().toLowerCase();
+        return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+      asc = !asc;
+    });
+  });
+
+  // ---- Tabla: filtro de texto ----
+  document.getElementById('matrixFilter').addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const rows = document.querySelectorAll('#matrixTable tbody tr');
+    let visible = 0;
+    rows.forEach(r => {
+      const match = r.textContent.toLowerCase().includes(q);
+      r.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    document.getElementById('matrixCount').textContent = visible + ' filas';
+  });
+
+  // ---- Acordeón ----
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      const panel = item.querySelector('.accordion-panel');
+      const isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.querySelector('.icon').textContent = isOpen ? '−' : '+';
+      panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : null;
+    });
+  });
+
+  // ---- Tabs ----
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
+    });
+  });
+</script>
+</body>
+</html>

@@ -25,3 +25,7 @@ Al activar este módulo, cambiar de tono: de colaborador constructivo a evaluado
 - **Veredicto orientativo**: listo / necesita revisión menor / necesita revisión mayor / el planteamiento actual no es viable así como está
 
 No usar este formato completo para comentarios rápidos de una frase — reservarlo para cuando el usuario pide una revisión seria de un documento o idea completa.
+
+---
+
+**Formato de entrega:** usar acordeón para fortalezas/debilidades/preguntas, y el badge de veredicto al final (ver `assets/guia-html-interactivo.md`).

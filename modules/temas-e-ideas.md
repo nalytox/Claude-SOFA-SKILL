@@ -22,3 +22,7 @@ Un tema mal acotado ("la inteligencia artificial en la educación") no es un tem
 - No hay forma de nombrar, aunque sea aproximadamente, qué datos o método se usarían para abordarlo.
 
 Cuando aparezca alguna de estas señales, volver a bajar por el embudo antes de seguir adelante.
+
+---
+
+**Formato de entrega:** presentar las alternativas de tema en un panel simple con badges de estado FINER; si son varias, la tabla interactiva también sirve (ver `assets/guia-html-interactivo.md`).

@@ -11,3 +11,7 @@ Revisar antes de dar por terminada una revisión de literatura:
 - [ ] El formato de cita es consistente con el estilo exigido por la institución del usuario.
 
 Si falta el punto del vacío específico, la revisión no está lista para pasar a la propuesta — es la falla más común y la más fácil de dejar pasar.
+
+---
+
+**Formato de entrega:** usar el componente de checklist con barra de progreso (ver `assets/guia-html-interactivo.md`).

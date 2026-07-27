@@ -11,3 +11,7 @@ Usar antes de que el usuario entregue una propuesta, capítulo o paper — ideal
 - [ ] El documento cumple la extensión, formato e idioma exigidos por la institución, si se conocen.
 
 Si el usuario no ha mencionado los requisitos exactos de formato de su institución, preguntar antes de asumir uno por defecto.
+
+---
+
+**Formato de entrega:** usar el componente de checklist con barra de progreso (ver `assets/guia-html-interactivo.md`).
