@@ -115,7 +115,6 @@ El uploader de skills de Claude.ai/Claude Code/API exige que el `.zip` contenga 
 cd carpeta-que-contiene-investigacion-tesis
 zip -r investigacion-tesis.zip investigacion-tesis -x "*.DS_Store" -x "__MACOSX*"
 ```
-(Te dejo también un `.zip` ya limpio junto con este README, listo para subir directamente.)
 
 ## 9. Limitaciones a tener en cuenta
 
