@@ -1,0 +1,1 @@
+Focus on SOFA, rigid/deformable interaction, Sim2Real, robotics.

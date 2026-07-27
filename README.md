@@ -1,1 +1,1 @@
-# Claude-SOFA-SKILL
+ResearchOS modular skill repository.

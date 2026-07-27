@@ -1,0 +1,1 @@
+Score novelty, closest work, overlap risk, publication potential.

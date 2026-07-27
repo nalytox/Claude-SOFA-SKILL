@@ -1,0 +1,1 @@
+Define question -> Search -> Screen -> Extract -> Compare -> Synthesize -> Identify gaps -> Report.
