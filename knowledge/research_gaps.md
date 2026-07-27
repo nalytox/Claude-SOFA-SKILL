@@ -1,1 +1,0 @@
-Gap types: methodological, experimental, benchmark, hardware, software, statistical, Sim2Real.

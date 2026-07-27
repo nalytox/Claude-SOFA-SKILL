@@ -1,4 +1,0 @@
-- Exhaustive search?
-- Closest papers?
-- Incremental or novel?
-- Validation plan?

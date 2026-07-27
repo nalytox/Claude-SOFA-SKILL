@@ -1,1 +1,0 @@
-Find unexplored research topics in rigid-soft interaction using SOFA.
